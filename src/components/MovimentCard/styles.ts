@@ -19,32 +19,47 @@ export const ComponentStyles = (context: string) => {
       borderEndWidth: 1,
       borderTopStartRadius: 20,
       borderTopEndRadius: 20,
-      padding: 20,
+      padding: 10,
       marginTop: 10,
     },
     textTitle: {
       color: THEME.COLORS.TEXT_DARK,
       fontSize: THEME.TEXT.MD,
       fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_TITLE,
+      marginTop: 10,
+      marginLeft: 10,
       marginBottom: 30,
     },
     header: {
       flexDirection: 'row',
       borderBottomColor: THEME.COLORS.TABLE,
       borderBottomWidth: 1,
-      marginBottom: 10,
+    },
+    headerDelete: {
+      width: 30,
+      textAlign: 'left',
+      fontSize: THEME.TEXT.SM,
+      fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_TITLE,
     },
     headerDate: {
-      width: 90,
+      width: 70,
+      fontSize: THEME.TEXT.SM,
+      fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_TITLE,
+    },
+    headerEdit: {
+      width: 30,
+      textAlign: 'center',
       fontSize: THEME.TEXT.SM,
       fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_TITLE,
     },
     headerCategory: {
       flex: 1,
       fontSize: THEME.TEXT.SM,
+      fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_TITLE,
     },
     headerValue: {
       fontSize: THEME.TEXT.SM,
+      fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_TITLE,
       flex: 1,
       maxWidth: 70,
       textAlign: 'right',
@@ -56,16 +71,24 @@ export const ComponentStyles = (context: string) => {
     },
     table: {
       flexDirection: 'row',
+      alignItems: 'center',
+      height: 50,
+      marginTop: 5,
+      marginBottom: 5,
     },
     date: {
-      width: 90,
+      width: 70,
+    },
+    options: {
+      width: 60,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },
     category: {
       flex: 1,
     },
     value: {
-      flex: 1,
-      maxWidth: 90,
+      width: 80,
       textAlign: 'right',
     },
     status: {
@@ -85,6 +108,11 @@ export const ComponentStyles = (context: string) => {
       justifyContent: 'center',
       alignItems: 'center',
       color: THEME.COLORS.BACKGROUND_APP,
+    },
+    buttons: {
+      width: 25,
+      justifyContent: 'flex-start',
+      marginRight: 5,
     },
   });
 };
