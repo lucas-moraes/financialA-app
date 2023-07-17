@@ -1,10 +1,10 @@
 import React from 'react';
 import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from 'react-native';
-import { GetMovimentGroup } from '../../services/useQuery';
-import { THEME } from '../../theme';
-import { FormatValue } from '../../helpers/formatValue';
+import { GetMovimentGroup } from '../../../services/useQuery';
+import { THEME } from '../../../theme';
+import { FormatValue } from '../../../helpers/formatValue';
 import { ComponentStyles } from './styles';
-import { useStore } from '../../context/useStore';
+import { useStore } from '../../../store/useStore';
 
 export const ResumeCard = () => {
   const { isLoading, data } = GetMovimentGroup();
