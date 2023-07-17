@@ -8,3 +8,5 @@ export const movimentOptions = [
     value: 1,
   },
 ];
+
+export const movimentType = ['entrada', 'saida'];

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Animated, FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { ComponentStyles } from './styles';
 import { GetMoviment } from '../../../services/useQuery';
 import { THEME } from '../../../theme';
@@ -10,9 +10,8 @@ import { IconEdit } from '../../atoms/IconEdit';
 import { IconCheckbox } from '../../atoms/IconCheckbox';
 
 export const MovimentCard = () => {
-  const { isLoading, data } = GetMoviment();
+  const { isRefetching, isLoading, data } = GetMoviment();
   const { mode, updateMode } = useStore();
-
   const styles = ComponentStyles(mode);
 
   const handleClick = () => {
@@ -33,30 +32,32 @@ export const MovimentCard = () => {
         <Text style={styles.headerStatus}>*</Text>
       </View>
 
-      {isLoading ? (
+      {isLoading || isRefetching ? (
         <ActivityIndicator style={styles.loader} size={70} color={THEME.COLORS.BACKGROUND_APP} />
       ) : (
         <>
           <FlatList
             data={data.moviment}
             keyExtractor={item => item.id}
-            renderItem={({ item }) => (
-              <View style={styles.table}>
-                <TouchableOpacity style={styles.buttons}>
-                  <IconDelete />
-                </TouchableOpacity>
-                <Text style={styles.date}>
-                  {item.dia}/{item.mes}/{item.ano}
-                </Text>
-                <TouchableOpacity style={styles.buttons}>
-                  <IconEdit />
-                </TouchableOpacity>
+            renderItem={({ item }) => {
+              return (
+                <Animated.View style={styles.table}>
+                  <TouchableOpacity style={styles.buttons}>
+                    <IconDelete />
+                  </TouchableOpacity>
+                  <Text style={styles.date}>
+                    {item.dia}/{item.mes}/{item.ano}
+                  </Text>
+                  <TouchableOpacity style={styles.buttons}>
+                    <IconEdit />
+                  </TouchableOpacity>
 
-                <Text style={styles.category}>{item.categoria}</Text>
-                <Text style={styles.value}>{FormatValue(item.valor)}</Text>
-                <Text style={styles.status}>{item.descricao.length < 3 ? '' : <IconCheckbox />}</Text>
-              </View>
-            )}
+                  <Text style={styles.category}>{item.categoria}</Text>
+                  <Text style={styles.value}>{FormatValue(item.valor)}</Text>
+                  <Text style={styles.status}>{item.descricao.length < 3 ? '' : <IconCheckbox />}</Text>
+                </Animated.View>
+              );
+            }}
           />
           <View style={styles.footer}>
             <Text>Total</Text>

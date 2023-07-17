@@ -1,16 +1,17 @@
 import React, { useRef, useState } from 'react';
 import { Animated, Text, TouchableOpacity, View } from 'react-native';
 import { ComponentStyles } from './styles';
-import { Formik } from 'formik';
+import { Formik, FormikValues } from 'formik';
 import { Datepicker } from '../../atoms/DatePicker';
 import { SelectInput } from '../../atoms/SelectInput';
 import { IconClose } from '../../atoms/IconClose';
-import { GetCategories } from '../../../services/useQuery';
+import { GetCategories, GetMoviment, RegisterData } from '../../../services/useQuery';
 import { initialValues } from '../../../constants/initialValuesFormik';
 import { movimentOptions } from '../../../constants/optionSelect';
 import { InputMask } from '../../atoms/InputMask';
 import { InputText } from '../../atoms/Input';
 import { ButtonPrimary } from '../../atoms/ButtonPrimary';
+import { postMoviment } from '../../../interface/postMoviment';
 
 export const EditCard = () => {
   const [show, setShow] = useState<'none' | 'flex'>('none');
@@ -18,6 +19,7 @@ export const EditCard = () => {
   const startingHeight = 70;
   const expand = useRef(new Animated.Value(startingHeight)).current;
   const dataCategories = GetCategories();
+  const { refetch } = GetMoviment();
 
   const handleOpen = () => {
     setShow('flex');
@@ -35,6 +37,13 @@ export const EditCard = () => {
       useNativeDriver: false,
     }).start();
     setShow('none');
+  };
+
+  const submit = (values: FormikValues) => {
+    const dataMoviment = values as unknown as postMoviment;
+    RegisterData(dataMoviment);
+    handleClose();
+    refetch();
   };
 
   return (
@@ -55,7 +64,7 @@ export const EditCard = () => {
           <Formik
             initialValues={initialValues}
             onSubmit={values => {
-              console.log(values);
+              submit(values);
             }}
           >
             {({ setFieldValue, handleSubmit }) => (

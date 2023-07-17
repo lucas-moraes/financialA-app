@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMovimentInterface } from '../interface/getMoviment';
 import { getMovimentGroupInterface } from '../interface/getMovimentGroup';
+import { postMoviment } from '../interface/postMoviment';
+import moment from 'moment';
+import { movimentType } from '../constants/optionSelect';
 
 export function GetMoviment() {
   return useQuery({
@@ -33,4 +36,20 @@ export function GetCategories() {
   });
 
   return categories;
+}
+
+export function RegisterData(data: postMoviment) {
+  const formdata = new FormData();
+  formdata.append('date', moment(data.date).format('YYYY-MM-DD'));
+  formdata.append('type', movimentType[Number(data.moviment)]);
+  formdata.append('category', data.categories);
+  formdata.append('value', data.value);
+  formdata.append('description', data.description);
+
+  console.log('🚀 ~ file: useQuery.ts:54 ~ RegisterData ~ formdata:', formdata);
+
+  fetch(`${process.env.SERVER}/backend/view/MovimentReg.php`, {
+    method: 'POST',
+    body: formdata,
+  });
 }

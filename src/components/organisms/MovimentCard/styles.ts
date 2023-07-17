@@ -73,12 +73,14 @@ export const ComponentStyles = (context: string) => {
     table: {
       flexDirection: 'row',
       alignItems: 'center',
-      height: 50,
+      height: 40,
       marginTop: 5,
+      paddingTop: 5,
+      borderRadius: 10,
       marginBottom: 5,
     },
     date: {
-      width: 70,
+      width: 75,
     },
     options: {
       width: 60,
