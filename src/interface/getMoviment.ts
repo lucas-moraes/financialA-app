@@ -14,4 +14,6 @@ export type getMovimentInterface = {
     total: string;
   };
   isLoading: boolean;
+  isRefetching: boolean;
+  refetch: () => void;
 };

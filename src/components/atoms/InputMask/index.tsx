@@ -5,7 +5,7 @@ import { MaskedTextInput } from 'react-native-mask-text';
 
 export const InputMask = ({ onChange }: props) => {
   const handlePress = (text: string) => {
-    return text.replace('R$ ', '').replace('.', '').replace(',', '.');
+    return text.replace('R$ ', '').replace(',', '.');
   };
 
   return (
