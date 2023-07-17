@@ -1,11 +1,13 @@
 import React from 'react';
 import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { ComponentStyles } from './styles';
-import { GetMoviment } from '../../services/useQuery';
-import { THEME } from '../../theme';
-import { FormatValue } from '../../helpers/formatValue';
-import { useStore } from '../../context/useStore';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { GetMoviment } from '../../../services/useQuery';
+import { THEME } from '../../../theme';
+import { FormatValue } from '../../../helpers/formatValue';
+import { useStore } from '../../../store/useStore';
+import { IconDelete } from '../../atoms/IconDelete';
+import { IconEdit } from '../../atoms/IconEdit';
+import { IconCheckbox } from '../../atoms/IconCheckbox';
 
 export const MovimentCard = () => {
   const { isLoading, data } = GetMoviment();
@@ -41,20 +43,18 @@ export const MovimentCard = () => {
             renderItem={({ item }) => (
               <View style={styles.table}>
                 <TouchableOpacity style={styles.buttons}>
-                  <Icon name="delete" size={20} color={THEME.COLORS.BACKGROUND_APP} />
+                  <IconDelete />
                 </TouchableOpacity>
                 <Text style={styles.date}>
                   {item.dia}/{item.mes}/{item.ano}
                 </Text>
                 <TouchableOpacity style={styles.buttons}>
-                  <Icon name="edit" size={20} color={THEME.COLORS.BACKGROUND_APP} />
+                  <IconEdit />
                 </TouchableOpacity>
 
                 <Text style={styles.category}>{item.categoria}</Text>
                 <Text style={styles.value}>{FormatValue(item.valor)}</Text>
-                <Text style={styles.status}>
-                  {item.descricao.length < 3 ? '' : <Icon name="check-box" size={20} color="#00b256" />}
-                </Text>
+                <Text style={styles.status}>{item.descricao.length < 3 ? '' : <IconCheckbox />}</Text>
               </View>
             )}
           />

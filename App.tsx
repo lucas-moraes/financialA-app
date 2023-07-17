@@ -1,19 +1,21 @@
 import React from 'react';
-import { MovimentCard } from './src/components/MovimentCard';
+import { MovimentCard } from './src/components/organisms/MovimentCard';
 import { Background } from './src/components/atoms/Background';
 import { Navbar } from './src/components/atoms/Navbar';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { StyleSheet, View } from 'react-native';
-import { ResumeCard } from './src/components/ResumeCard';
-import { useStore } from './src/context/useStore';
+import { StatusBar, StyleSheet, View } from 'react-native';
+import { ResumeCard } from './src/components/organisms/ResumeCard';
+import { useStore } from './src/store/useStore';
+import { EditCard } from './src/components/organisms/EditCard';
 
 function App(): JSX.Element {
   const state = useStore(store => store);
 
   return (
     <QueryClientProvider client={new QueryClient()}>
+      <StatusBar animated={false} backgroundColor="transparent" translucent={true} />
       <Background>
-        <Navbar />
+        <Navbar title="Finance" />
         <View style={styles.view}>
           <ResumeCard />
           <MovimentCard />
@@ -21,6 +23,7 @@ function App(): JSX.Element {
             <>
               <ResumeCard />
               <MovimentCard />
+              <EditCard />
             </>
           ) : (
             <>

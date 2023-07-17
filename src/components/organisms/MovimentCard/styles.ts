@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { THEME } from '../../theme';
+import { THEME } from '../../../theme';
 
 export const ComponentStyles = (context: string) => {
   return StyleSheet.create({
@@ -21,6 +21,7 @@ export const ComponentStyles = (context: string) => {
       borderTopEndRadius: 20,
       padding: 10,
       marginTop: 10,
+      paddingBottom: 90,
     },
     textTitle: {
       color: THEME.COLORS.TEXT_DARK,
