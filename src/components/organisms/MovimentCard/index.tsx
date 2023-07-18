@@ -11,7 +11,7 @@ import { IconCheckbox } from '../../atoms/IconCheckbox';
 
 export const MovimentCard = () => {
   const { isRefetching, isLoading, data } = GetMoviment();
-  const { mode, updateMode } = useStore();
+  const { mode, updateMode, updateShowModal, updateSelectedId } = useStore();
   const styles = ComponentStyles(mode);
 
   const handleClick = () => {
@@ -42,7 +42,13 @@ export const MovimentCard = () => {
             renderItem={({ item }) => {
               return (
                 <Animated.View style={styles.table}>
-                  <TouchableOpacity style={styles.buttons}>
+                  <TouchableOpacity
+                    style={styles.buttons}
+                    onPress={() => {
+                      updateShowModal();
+                      updateSelectedId(item.id);
+                    }}
+                  >
                     <IconDelete />
                   </TouchableOpacity>
                   <Text style={styles.date}>

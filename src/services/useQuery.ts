@@ -38,7 +38,7 @@ export function GetCategories() {
   return categories;
 }
 
-export function RegisterData(data: postMoviment) {
+export async function RegisterData(data: postMoviment) {
   const formdata = new FormData();
   formdata.append('date', moment(data.date).format('YYYY-MM-DD'));
   formdata.append('type', movimentType[Number(data.moviment)]);
@@ -46,10 +46,22 @@ export function RegisterData(data: postMoviment) {
   formdata.append('value', data.value);
   formdata.append('description', data.description);
 
-  console.log('🚀 ~ file: useQuery.ts:54 ~ RegisterData ~ formdata:', formdata);
-
-  fetch(`${process.env.SERVER}/backend/view/MovimentReg.php`, {
+  return fetch(`${process.env.SERVER}/backend/view/MovimentReg.php`, {
     method: 'POST',
     body: formdata,
-  });
+  })
+    .then(res => res)
+    .catch(e => e);
+}
+
+export async function DeleteData(id: number) {
+  const formdata = new FormData();
+  formdata.append('id', id);
+
+  if (id > 0) {
+    await fetch(`${process.env.SERVER}/backend/view/MovimentDel.php`, {
+      method: 'POST',
+      body: formdata,
+    }).then(res => res);
+  }
 }

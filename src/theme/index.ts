@@ -12,10 +12,12 @@ export const THEME = {
       TEXT: '#261566',
     },
     TABLE: '#af9aff',
+    WARNING: '#FFB721',
+    CANCEL: '#F44336',
   },
   TEXT: {
     SM: 16,
-    MD: 20,
+    MD: 18,
     LG: 24,
     FONT_FAMILY: {
       TEXT_TITLE: 'Montserrat-SemiBold',
