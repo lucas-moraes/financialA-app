@@ -39,9 +39,9 @@ export const EditCard = () => {
     setShow('none');
   };
 
-  const submit = (values: FormikValues) => {
+  const submit = async (values: FormikValues) => {
     const dataMoviment = values as unknown as postMoviment;
-    RegisterData(dataMoviment);
+    await RegisterData(dataMoviment);
     handleClose();
     refetch();
   };

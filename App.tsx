@@ -7,13 +7,14 @@ import { StatusBar, StyleSheet, View } from 'react-native';
 import { ResumeCard } from './src/components/organisms/ResumeCard';
 import { useStore } from './src/store/useStore';
 import { EditCard } from './src/components/organisms/EditCard';
+import { ModalDeleteMoviment } from './src/components/atoms/ModalDeleteMoviment';
 
 function App(): JSX.Element {
   const state = useStore(store => store);
 
   return (
     <QueryClientProvider client={new QueryClient()}>
-      <StatusBar animated={false} backgroundColor="transparent" translucent={true} />
+      <StatusBar backgroundColor="transparent" translucent={true} />
       <Background>
         <Navbar title="Finance" />
         <View style={styles.view}>
@@ -33,6 +34,7 @@ function App(): JSX.Element {
           )}
         </View>
       </Background>
+      <ModalDeleteMoviment />
     </QueryClientProvider>
   );
 }
