@@ -10,4 +10,7 @@ export const useStore = create<TStore>(set => ({
 
   selectedId: 0,
   updateSelectedId: (id: number) => set({ selectedId: id }),
+
+  toEdit: false,
+  updateToEdit: () => set(state => ({ toEdit: !state.toEdit })),
 }));

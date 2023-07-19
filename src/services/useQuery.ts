@@ -4,12 +4,25 @@ import { getMovimentGroupInterface } from '../interface/getMovimentGroup';
 import { postMoviment } from '../interface/postMoviment';
 import moment from 'moment';
 import { movimentType } from '../constants/optionSelect';
+import { getMovimentByIdInterface } from '../interface/getMovimentById';
 
 export function GetMoviment() {
   return useQuery({
     queryKey: ['moviment'],
     queryFn: () => fetch(`${process.env.SERVER}/backend/view/MovimentGet.php`).then(res => res.json()),
   }) as unknown as getMovimentInterface;
+}
+
+export async function GetMovimentById(id: number) {
+  const formdata = new FormData();
+  formdata.append('id', id);
+
+  const response: getMovimentByIdInterface[] = await fetch(`${process.env.SERVER}/backend/view/MovimentGetById.php`, {
+    method: 'POST',
+    body: formdata,
+  }).then(res => res.json());
+
+  return response[0];
 }
 
 export function GetMovimentGroup() {
@@ -64,4 +77,21 @@ export async function DeleteData(id: number) {
       body: formdata,
     }).then(res => res);
   }
+}
+
+export async function UpdateData(data: postMoviment, id: number) {
+  const formdata = new FormData();
+  formdata.append('id', id);
+  formdata.append('date', moment(data.date).format('YYYY-MM-DD'));
+  formdata.append('type', movimentType[Number(data.moviment)]);
+  formdata.append('category', data.categories);
+  formdata.append('value', data.value);
+  formdata.append('description', data.description);
+
+  return fetch(`${process.env.SERVER}/backend/view/MovimentSet.php`, {
+    method: 'POST',
+    body: formdata,
+  })
+    .then(res => res)
+    .catch(e => e);
 }

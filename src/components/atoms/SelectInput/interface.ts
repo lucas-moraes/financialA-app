@@ -7,6 +7,7 @@ export type SelectInputProps = {
   title: string;
   placeholder: string;
   onSelect: (value: any) => any;
+  value: string;
   dataCategories: {
     value: any;
     label: any;

@@ -6,7 +6,7 @@ import { TextInput, View } from 'react-native';
 import { props } from './interface';
 import { THEME } from '../../../theme';
 
-export const Datepicker = ({ name, onConfirm }: props) => {
+export const Datepicker = ({ name, value, onConfirm }: props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [meta] = useField(name);
 
@@ -16,7 +16,7 @@ export const Datepicker = ({ name, onConfirm }: props) => {
         style={styles.input}
         placeholder="Data"
         placeholderTextColor={THEME.COLORS.TEXT_DARK}
-        value={meta.value ? meta.value.toLocaleDateString('pt-BR') : ''}
+        value={meta.value ? meta.value.toLocaleDateString('pt-BR') : value}
         onPressIn={() => setIsOpen(true)}
       />
 
