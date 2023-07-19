@@ -66,7 +66,7 @@ export const MovimentCard = () => {
 
                   <Text style={styles.category}>{item.categoria}</Text>
                   <Text style={styles.value}>{FormatValue(item.valor)}</Text>
-                  <Text style={styles.status}>{item.descricao.length < 3 ? '' : <IconCheckbox />}</Text>
+                  <Text style={styles.status}>{item.descricao.search('PAGO') > -1 && <IconCheckbox />}</Text>
                 </Animated.View>
               );
             }}
