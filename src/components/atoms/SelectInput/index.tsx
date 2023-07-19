@@ -9,7 +9,7 @@ export const TextTitle = ({ children }: TextTitleProps) => {
   return <Text style={styles.input}>{children}</Text>;
 };
 
-export const SelectInput = ({ name, title, placeholder, onSelect, dataCategories }: SelectInputProps) => {
+export const SelectInput = ({ name, title, value, placeholder, onSelect, dataCategories }: SelectInputProps) => {
   const [meta] = useField(name);
 
   return (
@@ -22,11 +22,17 @@ export const SelectInput = ({ name, title, placeholder, onSelect, dataCategories
         items={dataCategories}
       >
         <TextTitle>
-          {typeof meta.value !== 'number'
+          {value === '' || value === undefined
             ? title
             : dataCategories.map((item: { value: number; label: string }) => {
-                if (item.value === meta.value) {
-                  return item.label;
+                if (meta.value) {
+                  if (item.value === meta.value) {
+                    return item.label;
+                  }
+                } else {
+                  if (item.value === Number(value)) {
+                    return item.label;
+                  }
                 }
               })}
         </TextTitle>

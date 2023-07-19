@@ -3,7 +3,7 @@ import { styles } from './styles';
 import { props } from './interface';
 import { MaskedTextInput } from 'react-native-mask-text';
 
-export const InputMask = ({ onChange }: props) => {
+export const InputMask = ({ onChange, value }: props) => {
   const handlePress = (text: string) => {
     return text.replace('R$ ', '');
   };
@@ -13,6 +13,7 @@ export const InputMask = ({ onChange }: props) => {
       <MaskedTextInput
         style={styles.text}
         type="currency"
+        value={value !== 'undefined' ? `${String(Number(value) * 100)}` : '0.00'}
         keyboardType="numeric"
         options={{
           prefix: 'R$ ',

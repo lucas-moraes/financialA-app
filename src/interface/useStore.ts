@@ -7,4 +7,7 @@ export type TStore = {
 
   selectedId: number;
   updateSelectedId: (selectedId: number) => void;
+
+  toEdit: boolean;
+  updateToEdit: () => void;
 };
