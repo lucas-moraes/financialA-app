@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MovimentCard } from './src/components/organisms/MovimentCard';
 import { Background } from './src/components/atoms/Background';
 import { Navbar } from './src/components/atoms/Navbar';
@@ -8,9 +8,22 @@ import { ResumeCard } from './src/components/organisms/ResumeCard';
 import { useStore } from './src/store/useStore';
 import { EditCard } from './src/components/organisms/EditCard';
 import { ModalDeleteMoviment } from './src/components/atoms/ModalDeleteMoviment';
+import SplashScreen from 'react-native-splash-screen';
 
 function App(): JSX.Element {
   const state = useStore(store => store);
+
+  useEffect(() => {
+    let init = true;
+
+    if (init) {
+      SplashScreen.hide();
+    }
+
+    () => {
+      init = false;
+    };
+  }, []);
 
   return (
     <QueryClientProvider client={new QueryClient()}>
