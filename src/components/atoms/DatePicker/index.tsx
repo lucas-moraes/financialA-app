@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-native-date-picker';
 import { styles } from './styles';
 import { useField } from 'formik';
-import { TextInput, View } from 'react-native';
+import { TextInput, TouchableOpacity, View } from 'react-native';
 import { props } from './interface';
 import { THEME } from '../../../theme';
 
@@ -12,13 +12,15 @@ export const Datepicker = ({ name, value, onConfirm }: props) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Data"
-        placeholderTextColor={THEME.COLORS.TEXT_DARK}
-        value={meta.value ? meta.value.toLocaleDateString('pt-BR') : value}
-        onPressIn={() => setIsOpen(true)}
-      />
+      <TouchableOpacity onPress={() => setIsOpen(true)}>
+        <TextInput
+          style={styles.input}
+          editable={false}
+          placeholder="Data"
+          placeholderTextColor={THEME.COLORS.TEXT_DARK}
+          value={meta.value ? meta.value.toLocaleDateString('pt-BR') : value}
+        />
+      </TouchableOpacity>
 
       <DatePicker
         modal

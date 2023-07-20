@@ -22,9 +22,8 @@ export const SelectInput = ({ name, title, value, placeholder, onSelect, dataCat
         items={dataCategories}
       >
         <TextTitle>
-          {value === '' || value === undefined
-            ? title
-            : dataCategories.map((item: { value: number; label: string }) => {
+          {value
+            ? dataCategories.map((item: { value: number; label: string }) => {
                 if (meta.value) {
                   if (item.value === meta.value) {
                     return item.label;
@@ -34,7 +33,8 @@ export const SelectInput = ({ name, title, value, placeholder, onSelect, dataCat
                     return item.label;
                   }
                 }
-              })}
+              })
+            : title}
         </TextTitle>
       </RNPickerSelect>
     </View>

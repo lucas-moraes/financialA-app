@@ -72,7 +72,7 @@ export const MovimentCard = () => {
             }}
           />
           <View style={styles.footer}>
-            <Text>Total</Text>
+            <Text style={styles.sumary}>Total</Text>
             <Text style={styles.value}>{FormatValue(data.total)}</Text>
           </View>
         </>

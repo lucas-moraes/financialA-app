@@ -23,7 +23,7 @@ export const EditCard = () => {
   const dataCategories = GetCategories();
   const { refetch } = GetMoviment();
   const { toEdit, updateToEdit, selectedId } = useStore();
-  const [dataToEdit, setDataToEdit] = useState<typeof initialValues>({});
+  const [dataToEdit, setDataToEdit] = useState<typeof initialValues>(initialValues);
 
   const handleOpen = () => {
     setShow('flex');
@@ -87,59 +87,66 @@ export const EditCard = () => {
     <>
       <View style={[styles.containerBack, { display: show }]} />
       <Animated.View style={[styles.container, { height: expand }]}>
-        <View style={styles.header}>
-          <TouchableOpacity
-            onPress={() => {
-              setDataToEdit({});
-              handleOpen();
-            }}
-          >
-            <Text style={styles.textTitle}>{toEdit ? 'Editar movimento' : 'Lançar movimento'}</Text>
-          </TouchableOpacity>
-          {show !== 'none' && (
-            <TouchableOpacity onPress={handleClose}>
-              <IconClose />
-            </TouchableOpacity>
-          )}
-        </View>
-        <View style={styles.body}>
-          <Formik
-            initialValues={initialValues}
-            onSubmit={values => {
-              submit(values);
-            }}
-          >
-            {({ setFieldValue, handleSubmit }) => (
-              <View>
-                <Datepicker name="date" onConfirm={value => setFieldValue('date', value)} value={dataToEdit.date} />
-                <SelectInput
-                  name="categories"
-                  title="Categorias"
-                  value={dataToEdit.categories}
-                  dataCategories={dataCategories}
-                  placeholder="Selecione uma categoria"
-                  onSelect={value => setFieldValue('categories', value)}
-                />
-                <SelectInput
-                  name="moviment"
-                  title="Movimento"
-                  value={dataToEdit.moviment}
-                  dataCategories={movimentOptions}
-                  placeholder="Selecione o movimento"
-                  onSelect={value => setFieldValue('moviment', value)}
-                />
-                <InputMask value={String(dataToEdit.value)} onChange={value => setFieldValue('value', value)} />
-                <InputText
-                  placeholder="Descrição"
-                  value={dataToEdit.description}
-                  name="description"
-                  onChangeText={value => setFieldValue('description', value)}
-                />
-                <ButtonPrimary onPress={handleSubmit} />
+        <Formik
+          initialValues={initialValues}
+          onSubmit={values => {
+            submit(values);
+          }}
+        >
+          {({ setFieldValue, handleSubmit, getFieldMeta, resetForm }) => (
+            <>
+              <View style={styles.header}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setDataToEdit({});
+                    handleOpen();
+                  }}
+                >
+                  <Text style={styles.textTitle}>{toEdit ? 'Editar movimento' : 'Lançar movimento'}</Text>
+                </TouchableOpacity>
+                {show !== 'none' && (
+                  <TouchableOpacity
+                    onPress={() => {
+                      handleClose();
+                      resetForm();
+                    }}
+                  >
+                    <IconClose />
+                  </TouchableOpacity>
+                )}
               </View>
-            )}
-          </Formik>
-        </View>
+              <View style={styles.body}>
+                <View>
+                  <Datepicker name="date" onConfirm={value => setFieldValue('date', value)} value={dataToEdit.date} />
+                  <SelectInput
+                    name="categories"
+                    title="Categorias"
+                    value={toEdit ? dataToEdit.categories : getFieldMeta('categories').value}
+                    dataCategories={dataCategories}
+                    placeholder="Selecione uma categoria"
+                    onSelect={value => setFieldValue('categories', value)}
+                  />
+                  <SelectInput
+                    name="moviment"
+                    title="Movimento"
+                    value={toEdit ? dataToEdit.moviment : getFieldMeta('moviment').value}
+                    dataCategories={movimentOptions}
+                    placeholder="Selecione o movimento"
+                    onSelect={value => setFieldValue('moviment', value)}
+                  />
+                  <InputMask value={String(dataToEdit.value)} onChange={value => setFieldValue('value', value)} />
+                  <InputText
+                    placeholder="Descrição"
+                    value={dataToEdit.description}
+                    name="description"
+                    onChangeText={value => setFieldValue('description', value)}
+                  />
+                  <ButtonPrimary onPress={handleSubmit} />
+                </View>
+              </View>
+            </>
+          )}
+        </Formik>
       </Animated.View>
     </>
   );

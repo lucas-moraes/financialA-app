@@ -39,28 +39,33 @@ export const ComponentStyles = (context: string) => {
     headerDelete: {
       width: 30,
       textAlign: 'left',
+      color: THEME.COLORS.TEXT_DARK,
       fontSize: THEME.TEXT.SM,
       fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_TITLE,
     },
     headerDate: {
       width: 70,
       fontSize: THEME.TEXT.SM,
+      color: THEME.COLORS.TEXT_DARK,
       fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_TITLE,
     },
     headerEdit: {
       width: 30,
       textAlign: 'center',
       fontSize: THEME.TEXT.SM,
+      color: THEME.COLORS.TEXT_DARK,
       fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_TITLE,
     },
     headerCategory: {
       flex: 1,
       fontSize: THEME.TEXT.SM,
+      color: THEME.COLORS.TEXT_DARK,
       fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_TITLE,
     },
     headerValue: {
       fontSize: THEME.TEXT.SM,
       fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_TITLE,
+      color: THEME.COLORS.TEXT_DARK,
       flex: 1,
       maxWidth: 70,
       textAlign: 'right',
@@ -69,6 +74,7 @@ export const ComponentStyles = (context: string) => {
       width: 20,
       marginLeft: 5,
       textAlign: 'center',
+      color: THEME.COLORS.TEXT_DARK,
     },
     table: {
       flexDirection: 'row',
@@ -78,33 +84,43 @@ export const ComponentStyles = (context: string) => {
       paddingTop: 5,
       borderRadius: 10,
       marginBottom: 5,
+      color: THEME.COLORS.TEXT_DARK,
     },
     date: {
       width: 75,
+      color: THEME.COLORS.TEXT_DARK,
     },
     options: {
       width: 60,
       flexDirection: 'row',
       justifyContent: 'space-between',
+      color: THEME.COLORS.TEXT_DARK,
     },
     category: {
       flex: 1,
+      color: THEME.COLORS.TEXT_DARK,
     },
     value: {
       width: 80,
       textAlign: 'right',
+      color: THEME.COLORS.TEXT_DARK,
     },
     status: {
       width: 20,
       marginLeft: 5,
       textAlign: 'center',
+      color: THEME.COLORS.TEXT_DARK,
     },
     footer: {
       flexDirection: 'row',
       justifyContent: 'flex-end',
       borderTopColor: THEME.COLORS.TABLE,
+      color: THEME.COLORS.TEXT_DARK,
       borderTopWidth: 1,
       marginTop: 10,
+    },
+    sumary: {
+      color: THEME.COLORS.TEXT_DARK,
     },
     loader: {
       flex: 1,

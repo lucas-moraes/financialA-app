@@ -26,10 +26,12 @@ export const styles = StyleSheet.create({
   textTitle: {
     fontSize: THEME.TEXT.LG,
     marginBottom: 20,
+    color: THEME.COLORS.TEXT_DARK,
   },
   textSubtitle: {
     fontSize: THEME.TEXT.MD,
     marginBottom: 40,
+    color: THEME.COLORS.TEXT_DARK,
   },
   buttonsContainer: {
     flexDirection: 'row',
