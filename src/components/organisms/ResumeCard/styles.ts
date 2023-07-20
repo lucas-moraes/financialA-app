@@ -31,15 +31,18 @@ export const ComponentStyles = (context: string) => {
     header: {
       flexDirection: 'row',
       borderBottomColor: THEME.COLORS.TABLE,
+      color: THEME.COLORS.TEXT_DARK,
       borderBottomWidth: 1,
       marginBottom: 10,
     },
     headerDescription: {
       flex: 1,
       fontSize: THEME.TEXT.SM,
+      color: THEME.COLORS.TEXT_DARK,
     },
     headerValue: {
       fontSize: THEME.TEXT.SM,
+      color: THEME.COLORS.TEXT_DARK,
       flex: 1,
       maxWidth: 70,
       textAlign: 'right',
@@ -49,11 +52,13 @@ export const ComponentStyles = (context: string) => {
     },
     description: {
       flex: 1,
+      color: THEME.COLORS.TEXT_DARK,
     },
     value: {
       flex: 1,
       maxWidth: 90,
       textAlign: 'right',
+      color: THEME.COLORS.TEXT_DARK,
     },
     footer: {
       flexDirection: 'row',
@@ -61,6 +66,10 @@ export const ComponentStyles = (context: string) => {
       borderTopColor: THEME.COLORS.TABLE,
       borderTopWidth: 1,
       marginTop: 10,
+      color: THEME.COLORS.TEXT_DARK,
+    },
+    sumary: {
+      color: THEME.COLORS.TEXT_DARK,
     },
     loader: {
       flex: 1,

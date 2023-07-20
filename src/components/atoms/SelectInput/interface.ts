@@ -7,7 +7,7 @@ export type SelectInputProps = {
   title: string;
   placeholder: string;
   onSelect: (value: any) => any;
-  value: string;
+  value: string | number;
   dataCategories: {
     value: any;
     label: any;
