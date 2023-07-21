@@ -14,6 +14,7 @@ export const THEME = {
     TABLE: '#af9aff',
     WARNING: '#FFB721',
     CANCEL: '#F44336',
+    BOTTOM_MENU: '#eee9ff',
   },
   TEXT: {
     SM: 16,

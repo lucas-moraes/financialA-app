@@ -141,7 +141,7 @@ export const EditCard = () => {
                     name="description"
                     onChangeText={value => setFieldValue('description', value)}
                   />
-                  <ButtonPrimary onPress={handleSubmit} />
+                  <ButtonPrimary onPress={handleSubmit}>Salvar</ButtonPrimary>
                 </View>
               </View>
             </>

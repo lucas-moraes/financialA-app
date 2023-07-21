@@ -10,4 +10,7 @@ export type TStore = {
 
   toEdit: boolean;
   updateToEdit: () => void;
+
+  toChoose: boolean;
+  updateToChoose: () => void;
 };

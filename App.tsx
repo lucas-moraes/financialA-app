@@ -9,6 +9,8 @@ import { useStore } from './src/store/useStore';
 import { EditCard } from './src/components/organisms/EditCard';
 import { ModalDeleteMoviment } from './src/components/atoms/ModalDeleteMoviment';
 import SplashScreen from 'react-native-splash-screen';
+import { ModalMenu } from './src/components/atoms/ModalMenu';
+import { THEME } from './src/theme';
 
 function App(): JSX.Element {
   const state = useStore(store => store);
@@ -27,7 +29,7 @@ function App(): JSX.Element {
 
   return (
     <QueryClientProvider client={new QueryClient()}>
-      <StatusBar backgroundColor="transparent" translucent={true} />
+      <StatusBar backgroundColor={THEME.COLORS.BACKGROUND_APP} translucent={false} />
       <Background>
         <Navbar title="Finance" />
         <View style={styles.view}>
@@ -48,6 +50,7 @@ function App(): JSX.Element {
         </View>
       </Background>
       <ModalDeleteMoviment />
+      <ModalMenu />
     </QueryClientProvider>
   );
 }
