@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef } from 'react';
 import { View, Text, Animated, TouchableOpacity } from 'react-native';
-import { styles } from './styles';
+import { ComponentStyles } from './styles';
 import { useStore } from '../../../store/useStore';
 import { IconClose } from '../IconClose';
 import { ButtonMenu } from '../ButtonMenu';
@@ -10,6 +10,8 @@ export const ModalMenu = () => {
   const startPositonLeft = 400;
   const movementFromLeft = useRef(new Animated.Value(startPositonLeft)).current;
   const { toChoose, updateToChoose } = useStore();
+
+  const styles = ComponentStyles();
 
   const handleOpen = () => {
     Animated.spring(movementFromLeft, {
