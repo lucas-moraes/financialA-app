@@ -13,4 +13,7 @@ export const useStore = create<TStore>(set => ({
 
   toEdit: false,
   updateToEdit: () => set(state => ({ toEdit: !state.toEdit })),
+
+  toChoose: false,
+  updateToChoose: () => set(state => ({ toChoose: !state.toChoose })),
 }));
