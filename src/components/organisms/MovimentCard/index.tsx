@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, Animated, FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { ComponentStyles } from './styles';
 import { GetMoviment } from '../../../services/useQuery';
 import { THEME } from '../../../theme';
@@ -41,7 +41,7 @@ export const MovimentCard = () => {
             keyExtractor={item => item.id}
             renderItem={({ item }) => {
               return (
-                <Animated.View style={styles.table}>
+                <View style={styles.table}>
                   <TouchableOpacity
                     style={styles.buttons}
                     onPress={() => {
@@ -67,7 +67,7 @@ export const MovimentCard = () => {
                   <Text style={styles.category}>{item.categoria}</Text>
                   <Text style={styles.value}>{FormatValue(item.valor)}</Text>
                   <Text style={styles.status}>{item.descricao.search('PAGO') > -1 && <IconCheckbox />}</Text>
-                </Animated.View>
+                </View>
               );
             }}
           />

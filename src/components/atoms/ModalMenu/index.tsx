@@ -9,7 +9,7 @@ import { ButtonMenu } from '../ButtonMenu';
 export const ModalMenu = () => {
   const startPositonLeft = 400;
   const movementFromLeft = useRef(new Animated.Value(startPositonLeft)).current;
-  const { toChoose, updateToChoose } = useStore();
+  const { toChoose, updateToChoose, updateToLaunchMovement, updateToAddCategory } = useStore();
 
   const styles = ComponentStyles();
 
@@ -57,13 +57,10 @@ export const ModalMenu = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.body}>
-              <ButtonMenu onPress={() => {}}>Lançar no mes seguinte</ButtonMenu>
+              <ButtonMenu onPress={updateToLaunchMovement}>Lançar no mês seguinte</ButtonMenu>
             </View>
             <View style={styles.body}>
-              <ButtonMenu onPress={() => {}}>Filtrar movimento</ButtonMenu>
-            </View>
-            <View style={styles.body}>
-              <ButtonMenu onPress={() => {}}>Adicionar categoria</ButtonMenu>
+              <ButtonMenu onPress={updateToAddCategory}>Adicionar categoria</ButtonMenu>
             </View>
           </View>
         </View>
