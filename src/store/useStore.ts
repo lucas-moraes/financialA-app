@@ -16,4 +16,10 @@ export const useStore = create<TStore>(set => ({
 
   toChoose: false,
   updateToChoose: () => set(state => ({ toChoose: !state.toChoose })),
+
+  toLaunchMovement: false,
+  updateToLaunchMovement: () => set(state => ({ toLaunchMovement: !state.toLaunchMovement })),
+
+  toAddCategory: false,
+  updateToAddCategory: () => set(state => ({ toAddCategory: !state.toAddCategory })),
 }));

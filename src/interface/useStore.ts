@@ -13,4 +13,10 @@ export type TStore = {
 
   toChoose: boolean;
   updateToChoose: () => void;
+
+  toLaunchMovement: boolean;
+  updateToLaunchMovement: () => void;
+
+  toAddCategory: boolean;
+  updateToAddCategory: () => void;
 };
