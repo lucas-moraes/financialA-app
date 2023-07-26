@@ -12,6 +12,28 @@ export function GetMoviment() {
   });
 }
 
+export function GetMovimentFiltered(month: number, year: number) {
+  const formdata = new FormData();
+  formdata.append('month', month);
+  formdata.append('year', year);
+
+  return useQuery({
+    queryKey: ['movimentFiltered'],
+    queryFn: () =>
+      fetch(`${process.env.SERVER}/backend/view/MovimentFilter.php`, {
+        method: 'POST',
+        body: formdata,
+      }).then(res => res.json()),
+  });
+}
+
+export function GetDate() {
+  return useQuery({
+    queryKey: ['date'],
+    queryFn: () => fetch(`${process.env.SERVER}/backend/view/DateGet.php`).then(res => res.json()),
+  });
+}
+
 export async function GetMovimentById(id: number) {
   const formdata = new FormData();
   formdata.append('id', id);

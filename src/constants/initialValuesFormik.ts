@@ -7,3 +7,8 @@ export const initialValues: FormikValues = {
   value: undefined,
   description: undefined,
 };
+
+export const initalValuesForConsultMovement: FormikValues = {
+  month: null,
+  yield: null,
+};
