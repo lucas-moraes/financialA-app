@@ -141,9 +141,9 @@ export const EditCard = () => {
                     name="description"
                     onChangeText={value => setFieldValue('description', value)}
                   />
-                  <ButtonPrimary onPress={handleSubmit}>Salvar</ButtonPrimary>
                 </View>
               </View>
+              <ButtonPrimary onPress={handleSubmit}>Salvar</ButtonPrimary>
             </>
           )}
         </Formik>

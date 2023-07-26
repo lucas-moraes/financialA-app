@@ -4,7 +4,6 @@ import { THEME } from '../../../theme';
 export const styles = StyleSheet.create({
   button: {
     margin: 5,
-    marginTop: 30,
     padding: 5,
     height: 40,
     backgroundColor: THEME.COLORS.BACKGROUND_APP,

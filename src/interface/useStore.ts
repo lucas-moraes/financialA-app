@@ -14,6 +14,9 @@ export type TStore = {
   toChoose: boolean;
   updateToChoose: () => void;
 
+  showFinder: boolean;
+  updateShowFinder: () => void;
+
   toLaunchMovement: boolean;
   updateToLaunchMovement: () => void;
 
