@@ -1,4 +1,4 @@
-export type getMovimentGroupInterface = {
+export type GetMovementGroupInterface = {
   data: {
     mes: number | null;
     ano: number | null;

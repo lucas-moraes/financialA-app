@@ -5,11 +5,11 @@ import { IconWarning } from '../IconWarning';
 import { IconCheckCircle } from '../IconCheckCircle';
 import { IconCancelCircle } from '../IconCancelCircle';
 import { styles } from './styles';
-import { DeleteData, GetMoviment } from '../../../services/useQuery';
+import { DeleteData, GetMovement } from '../../../services/useQuery';
 
-export const ModalDeleteMoviment = () => {
+export const ModalDeleteMovement = () => {
   const { showModal, updateShowModal, selectedId } = useStore();
-  const { refetch } = GetMoviment();
+  const { refetch } = GetMovement();
 
   const handleCheck = async () => {
     updateShowModal();
@@ -25,7 +25,7 @@ export const ModalDeleteMoviment = () => {
           <View style={styles.modalView}>
             <IconWarning />
             <Text style={styles.textTitle}>Atenção</Text>
-            <Text style={styles.textSubtitle}>Tem certeza que deseja apagar o movimento?</Text>
+            <Text style={styles.textSubtitle}>Tem certeza que deseja apagar o Movemento?</Text>
             <View style={styles.buttonsContainer}>
               <TouchableOpacity onPress={handleCheck}>
                 <IconCheckCircle />

@@ -3,7 +3,7 @@ import { FormikValues } from 'formik';
 export const initialValues: FormikValues = {
   date: undefined,
   categories: undefined,
-  moviment: undefined,
+  Movement: undefined,
   value: undefined,
   description: undefined,
 };
