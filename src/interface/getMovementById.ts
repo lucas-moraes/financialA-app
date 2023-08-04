@@ -1,4 +1,4 @@
-export type getMovimentByIdInterface = {
+export type GetMovementByIdInterface = {
   id: number;
   dia: number;
   mes: number;

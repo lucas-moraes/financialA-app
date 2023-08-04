@@ -1,13 +1,13 @@
 import React from 'react';
 import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from 'react-native';
-import { GetMovimentGroup } from '../../../services/useQuery';
+import { GetMovementGroup } from '../../../services/useQuery';
 import { THEME } from '../../../theme';
 import { FormatValue } from '../../../helpers/formatValue';
 import { ComponentStyles } from './styles';
 import { useStore } from '../../../store/useStore';
 
 export const ResumeCard = () => {
-  const { isLoading, data } = GetMovimentGroup();
+  const { isLoading, data } = GetMovementGroup();
   const { mode, updateMode } = useStore();
 
   const styles = ComponentStyles(mode);
@@ -19,7 +19,7 @@ export const ResumeCard = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handleClick}>
-        <Text style={styles.textTitle}>Movimentação no ano</Text>
+        <Text style={styles.textTitle}>Movementação no ano</Text>
       </TouchableOpacity>
       <View style={styles.header}>
         <Text style={styles.headerDescription}>Descrição</Text>
@@ -32,12 +32,14 @@ export const ResumeCard = () => {
         <>
           <FlatList
             data={data.categoriesByYear}
-            renderItem={({ item }) => (
-              <View style={styles.table}>
-                <Text style={styles.description}>{item.categoria}</Text>
-                <Text style={styles.value}>{FormatValue(item.valor)}</Text>
-              </View>
-            )}
+            renderItem={({ item }) => {
+              return (
+                <View style={styles.table}>
+                  <Text style={styles.description}>{item.categoria}</Text>
+                  <Text style={styles.value}>{FormatValue(item.valor)}</Text>
+                </View>
+              );
+            }}
           />
           <View style={styles.footer}>
             <Text style={styles.sumary}>Total</Text>

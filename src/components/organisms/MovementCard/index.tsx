@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { ComponentStyles } from './styles';
-import { GetMoviment } from '../../../services/useQuery';
+import { GetMovement, GetMovementFiltered } from '../../../services/useQuery';
 import { THEME } from '../../../theme';
 import { FormatValue } from '../../../helpers/formatValue';
 import { useStore } from '../../../store/useStore';
@@ -11,10 +12,12 @@ import { IconEdit } from '../../atoms/IconEdit';
 import { IconCheckbox } from '../../atoms/IconCheckbox';
 import { IconSearch } from '../../atoms/IconSearch';
 import { FilterDate } from '../ConsultGroup';
+import { FilterMovement } from '../../../interface/postMovement';
+import { Movement } from '../../../interface/getMovement';
 
-export const MovimentCard = () => {
+export const MovementCard = () => {
   const { showFinder, updateShowFinder } = useStore();
-  const getMoviment = GetMoviment();
+  const [movement, setMovement] = useState<Movement>();
   const { mode, updateMode, updateShowModal, updateSelectedId, updateToEdit } = useStore();
   const styles = ComponentStyles(mode);
 
@@ -22,11 +25,19 @@ export const MovimentCard = () => {
     updateMode('month');
   };
 
-  let movement = getMoviment;
+  const { isLoading, data } = GetMovement();
 
-  const consultMovement = (month: number, year: number) => {
-    console.log(month, year);
-  };
+  async function ConsultMovement(period: FilterMovement) {
+    const newMovement = await GetMovementFiltered(period);
+
+    setMovement(newMovement);
+  }
+
+  useMemo(() => {
+    if (!isLoading) {
+      setMovement(data);
+    }
+  }, [isLoading]);
 
   return (
     <View style={styles.container}>
@@ -45,7 +56,11 @@ export const MovimentCard = () => {
         )}
       </View>
 
-      <FilterDate handleFind={(month, year) => consultMovement(month, year)} />
+      <FilterDate
+        handleFind={(month, year) => {
+          ConsultMovement({ month: month, year: year });
+        }}
+      />
 
       <View style={styles.header}>
         <Text style={styles.headerDelete} />
@@ -56,12 +71,12 @@ export const MovimentCard = () => {
         <Text style={styles.headerStatus} />
       </View>
 
-      {movement.isLoading || movement.isRefetching ? (
+      {movement === undefined ? (
         <ActivityIndicator style={styles.loader} size={70} color={THEME.COLORS.BACKGROUND_APP} />
       ) : (
         <>
           <FlatList
-            data={movement.data.moviment}
+            data={movement?.moviment}
             keyExtractor={item => item.id}
             renderItem={({ item }) => {
               return (
@@ -97,7 +112,7 @@ export const MovimentCard = () => {
           />
           <View style={styles.footer}>
             <Text style={styles.sumary}>Total</Text>
-            <Text style={styles.value}>{FormatValue(movement.data.total)}</Text>
+            <Text style={styles.value}>{FormatValue(movement?.total)}</Text>
           </View>
         </>
       )}

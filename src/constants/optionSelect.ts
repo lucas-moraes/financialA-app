@@ -1,4 +1,4 @@
-export const movimentOptions = [
+export const MovementOptions = [
   {
     label: 'Entrada de dinheiro',
     value: 0,
@@ -9,7 +9,7 @@ export const movimentOptions = [
   },
 ];
 
-export const movimentType = ['entrada', 'saida'];
+export const MovementType = ['entrada', 'saida'];
 
 export const monthOptions = [
   {
