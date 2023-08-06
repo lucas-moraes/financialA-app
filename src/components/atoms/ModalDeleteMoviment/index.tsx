@@ -25,7 +25,7 @@ export const ModalDeleteMovement = () => {
           <View style={styles.modalView}>
             <IconWarning />
             <Text style={styles.textTitle}>Atenção</Text>
-            <Text style={styles.textSubtitle}>Tem certeza que deseja apagar o Movemento?</Text>
+            <Text style={styles.textSubtitle}>Tem certeza que deseja apagar o Movimento?</Text>
             <View style={styles.buttonsContainer}>
               <TouchableOpacity onPress={handleCheck}>
                 <IconCheckCircle />
