@@ -60,7 +60,14 @@ export const ModalMenu = () => {
               <ButtonMenu onPress={updateToLaunchMovement}>Lançar no mês seguinte</ButtonMenu>
             </View>
             <View style={styles.body}>
-              <ButtonMenu onPress={updateToAddCategory}>Adicionar categoria</ButtonMenu>
+              <ButtonMenu
+                onPress={() => {
+                  updateToAddCategory();
+                  handleClose();
+                }}
+              >
+                Adicionar categoria
+              </ButtonMenu>
             </View>
           </View>
         </View>

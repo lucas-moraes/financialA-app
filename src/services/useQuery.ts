@@ -16,6 +16,15 @@ export function GetMovement() {
   return response;
 }
 
+export function GetCategory() {
+  const response = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => axios.post(`${process.env.SERVER}/backend/view/CategoryGet.php`, {}).then(res => res.data),
+  });
+
+  return response;
+}
+
 export async function GetMovementFiltered(period: FilterMovement) {
   const response = await axios
     .postForm(`${process.env.SERVER}/backend/view/MovimentFilter.php`, {

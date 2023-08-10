@@ -12,7 +12,7 @@ import { MovementOptions } from '../../../constants/optionSelect';
 import { InputMask } from '../../atoms/InputMask';
 import { InputText } from '../../atoms/Input';
 import { ButtonPrimary } from '../../atoms/ButtonPrimary';
-import { postMovement } from '../../../interface/postMovement';
+import { PostMovement } from '../../../interface/postMovement';
 import { useStore } from '../../../store/useStore';
 
 export const EditCard = () => {
@@ -47,7 +47,7 @@ export const EditCard = () => {
   };
 
   const submit = async (values: FormikValues) => {
-    const dataMovement = values as unknown as postMovement;
+    const dataMovement = values as unknown as PostMovement;
 
     if (toEdit) {
       await UpdateData(dataMovement, selectedId);

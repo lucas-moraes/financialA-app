@@ -12,3 +12,7 @@ export const initalValuesForConsultMovement: FormikValues = {
   month: null,
   yield: null,
 };
+
+export const initalValuesForCategories: FormikValues = {
+  description: undefined,
+};
