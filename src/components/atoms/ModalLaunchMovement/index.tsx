@@ -4,14 +4,14 @@ import { View, Text, Animated, TouchableOpacity, FlatList } from 'react-native';
 import { ComponentStyles } from './styles';
 import { useStore } from '../../../store/useStore';
 import { IconClose } from '../IconClose';
-import { GetMoviment } from '../../../services/useQuery';
+import { GetMovement } from '../../../services/useQuery';
 import { IconDelete } from '../IconDelete';
 import { FormatValue } from '../../../helpers/formatValue';
 import { ButtonPrimary } from '../ButtonPrimary';
 
 export const ModalLaunchMovement = () => {
   const [refresh, startRefresh] = useState(false);
-  const { data } = GetMoviment();
+  const { data } = GetMovement();
   const startPositonRight = 450;
   const movementFromRight = useRef(new Animated.Value(startPositonRight)).current;
   const { toLaunchMovement, updateToLaunchMovement } = useStore();
