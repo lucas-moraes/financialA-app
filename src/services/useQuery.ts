@@ -100,6 +100,12 @@ export async function RegisterData(data: PostMovement) {
     .catch(e => e);
 }
 
+export async function RegisterCategory(description: string) {
+  await axios.postForm(`${process.env.SERVER}/backend/view/CategoryReg.php`, {
+    description: description,
+  });
+}
+
 export async function DeleteData(id: number) {
   const formdata = new FormData();
   formdata.append('id', id);

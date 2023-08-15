@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@react-native-community/picker": "^1.8.1",
+    "@react-native-community/picker": "1.8.1",
     "@tanstack/react-query": "^4.29.19",
     "@tradle/react-native-http": "^2.0.0",
     "assert": "^1.1.1",

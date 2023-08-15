@@ -1,34 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef } from 'react';
-import { View, Text, Animated, TouchableOpacity, FlatList } from 'react-native';
+import React, { useMemo, useRef } from 'react';
+import { View, Text, Animated, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import { ComponentStyles } from './styles';
 import { useStore } from '../../../store/useStore';
 import { IconClose } from '../IconClose';
-import { Formik } from 'formik';
+import { Formik, FormikValues } from 'formik';
 import { initalValuesForCategories } from '../../../constants/initialValuesFormik';
 import { InputText } from '../Input';
 import { ButtonPrimary } from '../ButtonPrimary';
-import { GetCategory } from '../../../services/useQuery';
+import { GetCategory, RegisterCategory } from '../../../services/useQuery';
+import { THEME } from '../../../theme';
 
 export const ModalCategories = () => {
-  // const startPositonLeft = 450;
-  const startPositonLeft = 0;
+  const startPositonLeft = 450;
   const categoriesFromRight = useRef(new Animated.Value(startPositonLeft)).current;
   const { toAddCategory, updateToAddCategory } = useStore();
 
   const styles = ComponentStyles();
 
-  const { isLoading, data, refetch } = GetCategory();
+  const { isLoading, isRefetching, data, refetch } = GetCategory();
 
-  console.log(data);
-
-  // const handleOpen = () => {
-  //   Animated.spring(categoriesFromRight, {
-  //     friction: 20,
-  //     toValue: 0,
-  //     useNativeDriver: false,
-  //   }).start();
-  // };
+  const handleOpen = () => {
+    Animated.spring(categoriesFromRight, {
+      friction: 20,
+      toValue: 0,
+      useNativeDriver: false,
+    }).start();
+  };
 
   const handleClose = () => {
     Animated.spring(categoriesFromRight, {
@@ -39,16 +37,17 @@ export const ModalCategories = () => {
     updateToAddCategory();
   };
 
-  // useEffect(() => {
-  //   let isOpened = false;
-  //   if (!isOpened && toAddCategory) {
-  //     handleOpen();
-  //   }
+  useMemo(() => {
+    let isOpened = false;
+    if (!isOpened && toAddCategory) {
+      handleOpen();
+    }
+  }, [toAddCategory]);
 
-  //   () => {
-  //     isOpened = true;
-  //   };
-  // }, [toAddCategory]);
+  const handleSubmit = async (values: FormikValues) => {
+    await RegisterCategory(values.description);
+    refetch();
+  };
 
   return (
     <>
@@ -69,10 +68,10 @@ export const ModalCategories = () => {
               <Formik
                 initialValues={initalValuesForCategories}
                 onSubmit={values => {
-                  submit(values);
+                  handleSubmit(values);
                 }}
               >
-                {({ setFieldValue, handleSubmit, getFieldMeta, resetForm }) => (
+                {({ setFieldValue, handleSubmit, getFieldMeta }) => (
                   <View style={styles.form}>
                     <InputText
                       placeholder="Descrição"
@@ -86,17 +85,25 @@ export const ModalCategories = () => {
                 )}
               </Formik>
 
-              <FlatList
-                data={data?.categorias}
-                keyExtractor={item => item.id}
-                renderItem={({ item }) => {
-                  return (
-                    <View style={styles.table}>
-                      <Text></Text>
-                    </View>
-                  );
-                }}
-              />
+              <View style={styles.containerFlatlist}>
+                {isLoading || isRefetching ? (
+                  <ActivityIndicator style={styles.loader} size={70} color={THEME.COLORS.BACKGROUND_APP} />
+                ) : (
+                  <FlatList
+                    refreshing={isRefetching || isLoading}
+                    data={data?.categoria}
+                    keyExtractor={item => item.id}
+                    persistentScrollbar={true}
+                    renderItem={({ item }) => {
+                      return (
+                        <View>
+                          <Text style={styles.textBody}>{item.descricao}</Text>
+                        </View>
+                      );
+                    }}
+                  />
+                )}
+              </View>
             </View>
           </View>
         </View>

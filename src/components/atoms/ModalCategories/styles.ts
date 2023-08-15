@@ -35,12 +35,30 @@ export const ComponentStyles = () => {
       fontSize: THEME.TEXT.MD,
       fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_TITLE,
     },
+    textBody: {
+      color: THEME.COLORS.TEXT_DARK,
+      fontSize: THEME.TEXT.SM,
+      fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_BODY,
+    },
     body: {
+      justifyContent: 'flex-start',
+    },
+    containerFlatlist: {
+      marginTop: 30,
+      margin: 10,
+      height: '70%',
       justifyContent: 'center',
     },
     form: {
+      marginTop: 20,
       flexDirection: 'row',
       justifyContent: 'space-between',
+    },
+    loader: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: THEME.COLORS.BACKGROUND_APP,
     },
   });
 };
