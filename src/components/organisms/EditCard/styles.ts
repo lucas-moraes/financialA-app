@@ -47,6 +47,7 @@ export const ComponentStyles = () => {
     },
     body: {
       marginTop: 30,
+      marginBottom: 30,
     },
   });
 };

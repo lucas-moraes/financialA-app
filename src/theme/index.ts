@@ -4,6 +4,7 @@ export const THEME = {
     TEXT_LIGHT: '#efeaff',
     TEXT_DARK: '#4c2bcc',
     CHECK_BOX: '#00b256',
+    RIGHT: '#f3f0ff',
     CARD: {
       BACKGROUND_PRIMARY: '#efeaff',
       BACKGROUND_SECUNDARY: '#af9aff',

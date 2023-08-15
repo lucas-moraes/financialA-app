@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { MovimentCard } from './src/components/organisms/MovimentCard';
+import { MovementCard } from './src/components/organisms/MovementCard';
 import { Background } from './src/components/atoms/Background';
 import { Navbar } from './src/components/atoms/Navbar';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -7,11 +7,12 @@ import { StatusBar, StyleSheet, View } from 'react-native';
 import { ResumeCard } from './src/components/organisms/ResumeCard';
 import { useStore } from './src/store/useStore';
 import { EditCard } from './src/components/organisms/EditCard';
-import { ModalDeleteMoviment } from './src/components/atoms/ModalDeleteMoviment';
 import SplashScreen from 'react-native-splash-screen';
 import { ModalMenu } from './src/components/atoms/ModalMenu';
 import { THEME } from './src/theme';
 import { ModalLaunchMovement } from './src/components/atoms/ModalLaunchMovement';
+import { ModalCategories } from './src/components/atoms/ModalCategories';
+import { ModalDeleteMovement } from './src/components/atoms/ModalDeleteMoviment';
 
 function App(): JSX.Element {
   const state = useStore(store => store);
@@ -35,24 +36,25 @@ function App(): JSX.Element {
         <Navbar title="Finance" />
         <View style={styles.view}>
           <ResumeCard />
-          <MovimentCard />
+          <MovementCard />
           {state.mode === 'month' ? (
             <>
               <ResumeCard />
-              <MovimentCard />
+              <MovementCard />
               <EditCard />
             </>
           ) : (
             <>
-              <MovimentCard />
+              <MovementCard />
               <ResumeCard />
             </>
           )}
         </View>
       </Background>
-      <ModalDeleteMoviment />
+      <ModalDeleteMovement />
       <ModalMenu />
       <ModalLaunchMovement />
+      <ModalCategories />
     </QueryClientProvider>
   );
 }

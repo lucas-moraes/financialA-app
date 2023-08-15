@@ -6,13 +6,13 @@ import { Formik, FormikValues } from 'formik';
 import { Datepicker } from '../../atoms/DatePicker';
 import { SelectInput } from '../../atoms/SelectInput';
 import { IconClose } from '../../atoms/IconClose';
-import { GetCategories, GetMoviment, GetMovimentById, RegisterData, UpdateData } from '../../../services/useQuery';
+import { GetCategories, GetMovement, GetMovementById, RegisterData, UpdateData } from '../../../services/useQuery';
 import { initialValues } from '../../../constants/initialValuesFormik';
-import { movimentOptions } from '../../../constants/optionSelect';
+import { MovementOptions } from '../../../constants/optionSelect';
 import { InputMask } from '../../atoms/InputMask';
 import { InputText } from '../../atoms/Input';
 import { ButtonPrimary } from '../../atoms/ButtonPrimary';
-import { postMoviment } from '../../../interface/postMoviment';
+import { PostMovement } from '../../../interface/postMovement';
 import { useStore } from '../../../store/useStore';
 
 export const EditCard = () => {
@@ -21,7 +21,7 @@ export const EditCard = () => {
   const startingHeight = 70;
   const expand = useRef(new Animated.Value(startingHeight)).current;
   const dataCategories = GetCategories();
-  const { refetch } = GetMoviment();
+  const { refetch } = GetMovement();
   const { toEdit, updateToEdit, selectedId } = useStore();
   const [dataToEdit, setDataToEdit] = useState<typeof initialValues>(initialValues);
 
@@ -47,25 +47,25 @@ export const EditCard = () => {
   };
 
   const submit = async (values: FormikValues) => {
-    const dataMoviment = values as unknown as postMoviment;
+    const dataMovement = values as unknown as PostMovement;
 
     if (toEdit) {
-      await UpdateData(dataMoviment, selectedId);
+      await UpdateData(dataMovement, selectedId);
       handleClose();
       refetch();
     } else {
-      await RegisterData(dataMoviment);
+      await RegisterData(dataMovement);
       handleClose();
       refetch();
     }
   };
 
-  const getMovimentForEdit = async () => {
-    const data = await GetMovimentById(selectedId);
+  const GetMovementForEdit = async () => {
+    const data = await GetMovementById(selectedId);
 
     setDataToEdit(prevState => ({ ...prevState, date: `${data.dia}/${data.mes}/${data.ano}` }));
     setDataToEdit(prevState => ({ ...prevState, categories: data.categoria }));
-    setDataToEdit(prevState => ({ ...prevState, moviment: data.tipo === 'entrada' ? 0 : 1 }));
+    setDataToEdit(prevState => ({ ...prevState, Movement: data.tipo === 'entrada' ? 0 : 1 }));
     setDataToEdit(prevState => ({ ...prevState, value: data.valor }));
     setDataToEdit(prevState => ({ ...prevState, description: data.descricao }));
 
@@ -75,7 +75,7 @@ export const EditCard = () => {
   useEffect(() => {
     let isOpened = false;
     if (!isOpened && toEdit && selectedId > 0) {
-      getMovimentForEdit();
+      GetMovementForEdit();
     }
 
     () => {
@@ -102,7 +102,7 @@ export const EditCard = () => {
                     handleOpen();
                   }}
                 >
-                  <Text style={styles.textTitle}>{toEdit ? 'Editar movimento' : 'Lançar movimento'}</Text>
+                  <Text style={styles.textTitle}>{toEdit ? 'Editar Movimento' : 'Lançar Movimento'}</Text>
                 </TouchableOpacity>
                 {show !== 'none' && (
                   <TouchableOpacity
@@ -127,12 +127,12 @@ export const EditCard = () => {
                     onSelect={value => setFieldValue('categories', value)}
                   />
                   <SelectInput
-                    name="moviment"
+                    name="Movement"
                     title="Movimento"
-                    value={toEdit ? dataToEdit.moviment : getFieldMeta('moviment').value}
-                    dataCategories={movimentOptions}
-                    placeholder="Selecione o movimento"
-                    onSelect={value => setFieldValue('moviment', value)}
+                    value={toEdit ? dataToEdit.Movement : getFieldMeta('Movement').value}
+                    dataCategories={MovementOptions}
+                    placeholder="Selecione o Movimento"
+                    onSelect={value => setFieldValue('Movement', value)}
                   />
                   <InputMask value={String(dataToEdit.value)} onChange={value => setFieldValue('value', value)} />
                   <InputText
@@ -141,9 +141,9 @@ export const EditCard = () => {
                     name="description"
                     onChangeText={value => setFieldValue('description', value)}
                   />
-                  <ButtonPrimary onPress={handleSubmit}>Salvar</ButtonPrimary>
                 </View>
               </View>
+              <ButtonPrimary onPress={handleSubmit}>Salvar</ButtonPrimary>
             </>
           )}
         </Formik>

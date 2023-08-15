@@ -1,16 +1,22 @@
-import React from 'react';
-import { ActivityIndicator, Animated, FlatList, Text, TouchableOpacity, View } from 'react-native';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useMemo, useState } from 'react';
+import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { ComponentStyles } from './styles';
-import { GetMoviment } from '../../../services/useQuery';
+import { GetMovement, GetMovementFiltered } from '../../../services/useQuery';
 import { THEME } from '../../../theme';
 import { FormatValue } from '../../../helpers/formatValue';
 import { useStore } from '../../../store/useStore';
 import { IconDelete } from '../../atoms/IconDelete';
 import { IconEdit } from '../../atoms/IconEdit';
 import { IconCheckbox } from '../../atoms/IconCheckbox';
+import { IconSearch } from '../../atoms/IconSearch';
+import { FilterDate } from '../ConsultGroup';
+import { FilterMovement } from '../../../interface/postMovement';
+import { Movement } from '../../../interface/getMovement';
 
-export const MovimentCard = () => {
-  const { isRefetching, isLoading, data } = GetMoviment();
+export const MovementCard = () => {
+  const { showFinder, updateShowFinder } = useStore();
+  const [movement, setMovement] = useState<Movement>();
   const { mode, updateMode, updateShowModal, updateSelectedId, updateToEdit } = useStore();
   const styles = ComponentStyles(mode);
 
@@ -18,30 +24,62 @@ export const MovimentCard = () => {
     updateMode('month');
   };
 
+  const { isLoading, data } = GetMovement();
+
+  async function ConsultMovement(period: FilterMovement) {
+    const newMovement = await GetMovementFiltered(period);
+
+    setMovement(newMovement);
+  }
+
+  useMemo(() => {
+    if (!isLoading) {
+      setMovement(data);
+    }
+  }, [isLoading]);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleClick}>
-        <Text style={styles.textTitle}>Lançamentos do Mês</Text>
-      </TouchableOpacity>
+      <View style={styles.headerTitle}>
+        <TouchableOpacity onPress={handleClick}>
+          <Text style={styles.textTitle}>Lançamentos do Mês</Text>
+        </TouchableOpacity>
+        {!showFinder && (
+          <TouchableOpacity
+            onPress={() => {
+              updateShowFinder();
+            }}
+          >
+            <IconSearch />
+          </TouchableOpacity>
+        )}
+      </View>
+
+      <FilterDate
+        handleFind={(month, year) => {
+          ConsultMovement({ month: month, year: year });
+        }}
+      />
+
       <View style={styles.header}>
         <Text style={styles.headerDelete} />
         <Text style={styles.headerDate}>Data</Text>
         <Text style={styles.headerEdit} />
         <Text style={styles.headerCategory}>Categoria</Text>
         <Text style={styles.headerValue}>Valor</Text>
-        <Text style={styles.headerStatus}>*</Text>
+        <Text style={styles.headerStatus} />
       </View>
 
-      {isLoading || isRefetching ? (
+      {movement === undefined ? (
         <ActivityIndicator style={styles.loader} size={70} color={THEME.COLORS.BACKGROUND_APP} />
       ) : (
         <>
           <FlatList
-            data={data.moviment}
+            data={movement?.moviment}
             keyExtractor={item => item.id}
             renderItem={({ item }) => {
               return (
-                <Animated.View style={styles.table}>
+                <View style={styles.table}>
                   <TouchableOpacity
                     style={styles.buttons}
                     onPress={() => {
@@ -67,13 +105,13 @@ export const MovimentCard = () => {
                   <Text style={styles.category}>{item.categoria}</Text>
                   <Text style={styles.value}>{FormatValue(item.valor)}</Text>
                   <Text style={styles.status}>{item.descricao.search('PAGO') > -1 && <IconCheckbox />}</Text>
-                </Animated.View>
+                </View>
               );
             }}
           />
           <View style={styles.footer}>
             <Text style={styles.sumary}>Total</Text>
-            <Text style={styles.value}>{FormatValue(data.total)}</Text>
+            <Text style={styles.value}>{FormatValue(movement?.total)}</Text>
           </View>
         </>
       )}

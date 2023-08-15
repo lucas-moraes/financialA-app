@@ -27,14 +27,19 @@ export const ComponentStyles = (context: string) => {
       color: THEME.COLORS.TEXT_DARK,
       fontSize: THEME.TEXT.MD,
       fontFamily: THEME.TEXT.FONT_FAMILY.TEXT_TITLE,
-      marginTop: 10,
-      marginLeft: 10,
-      marginBottom: 30,
     },
     header: {
       flexDirection: 'row',
       borderBottomColor: THEME.COLORS.TABLE,
       borderBottomWidth: 1,
+    },
+    headerTitle: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      height: 70,
+      marginLeft: 10,
+      marginRight: 5,
     },
     headerDelete: {
       width: 30,
