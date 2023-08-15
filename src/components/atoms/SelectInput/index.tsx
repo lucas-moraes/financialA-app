@@ -46,11 +46,11 @@ export const SelectInput = ({ name, title, value, placeholder, onSelect, dataCat
             ? dataCategories.map((item: { value: number; label: string }) => {
                 if (meta.value) {
                   if (item.value === meta.value) {
-                    return item.label;
+                    return item?.label ?? ' ';
                   }
                 } else {
                   if (item.value === Number(value)) {
-                    return item.label;
+                    return item?.label ?? ' ';
                   }
                 }
               })
