@@ -1,16 +1,14 @@
 import { StyleSheet } from 'react-native';
 import { THEME } from '../../../theme';
-import { useStore } from '../../../store/useStore';
 
 export const ComponentStyles = () => {
-  const { toLaunchMovement } = useStore();
   return StyleSheet.create({
     backView: {
       width: '100%',
       height: '100%',
       backgroundColor: 'rgba(0,0,0, 0.5)',
       position: 'absolute',
-      display: `${toLaunchMovement ? 'flex' : 'none'}`,
+      display: 'flex',
     },
     frontView: {
       width: '100%',
@@ -30,13 +28,14 @@ export const ComponentStyles = () => {
       flexDirection: 'row',
       justifyContent: 'space-between',
       marginTop: 20,
-      marginBottom: 20,
+      marginBottom: 10,
     },
     flatList: {
       borderTopColor: THEME.COLORS.BACKGROUND_APP,
       borderTopWidth: 1,
       borderBottomColor: THEME.COLORS.BACKGROUND_APP,
       borderBottomWidth: 1,
+      marginBottom: 50,
     },
     headerDelete: {
       width: 30,
@@ -72,7 +71,7 @@ export const ComponentStyles = () => {
     },
     body: {
       justifyContent: 'center',
-      height: 600,
+      height: 700,
     },
     loader: {
       flex: 1,

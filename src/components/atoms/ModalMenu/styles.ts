@@ -1,16 +1,14 @@
 import { StyleSheet } from 'react-native';
 import { THEME } from '../../../theme';
-import { useStore } from '../../../store/useStore';
 
 export const ComponentStyles = () => {
-  const { toChoose } = useStore();
   return StyleSheet.create({
     backView: {
       width: '100%',
       height: '100%',
       backgroundColor: 'rgba(0,0,0, 0.5)',
       position: 'absolute',
-      display: `${toChoose ? 'flex' : 'none'}`,
+      display: 'flex',
     },
     frontView: {
       width: '100%',

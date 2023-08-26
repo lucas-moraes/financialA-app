@@ -20,7 +20,7 @@ export const ComponentStyles = (context: string) => {
       borderTopStartRadius: 20,
       borderTopEndRadius: 20,
       padding: 10,
-      marginTop: 10,
+      marginTop: 20,
       paddingBottom: 90,
     },
     textTitle: {
@@ -37,7 +37,8 @@ export const ComponentStyles = (context: string) => {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      height: 70,
+      marginBottom: 20,
+      marginTop: 10,
       marginLeft: 10,
       marginRight: 5,
     },

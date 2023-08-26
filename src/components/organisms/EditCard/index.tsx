@@ -65,7 +65,7 @@ export const EditCard = () => {
 
     setDataToEdit(prevState => ({ ...prevState, date: `${data.dia}/${data.mes}/${data.ano}` }));
     setDataToEdit(prevState => ({ ...prevState, categories: data.categoria }));
-    setDataToEdit(prevState => ({ ...prevState, Movement: data.tipo === 'entrada' ? 0 : 1 }));
+    setDataToEdit(prevState => ({ ...prevState, movement: data.tipo === 'entrada' ? 0 : 1 }));
     setDataToEdit(prevState => ({ ...prevState, value: data.valor }));
     setDataToEdit(prevState => ({ ...prevState, description: data.descricao }));
 

@@ -87,7 +87,7 @@ export function GetCategories() {
 export async function RegisterData(data: PostMovement) {
   const formdata = new FormData();
   formdata.append('date', moment(data.date).format('YYYY-MM-DD'));
-  formdata.append('type', MovementType[Number(data.Movement)]);
+  formdata.append('type', MovementType[Number(data.movement)]);
   formdata.append('category', data.categories);
   formdata.append('value', data.value);
   formdata.append('description', data.description);
@@ -122,7 +122,7 @@ export async function UpdateData(data: PostMovement, id: number) {
   const formdata = new FormData();
   formdata.append('id', id);
   formdata.append('date', moment(data.date).format('YYYY-MM-DD'));
-  formdata.append('type', MovementType[Number(data.Movement)]);
+  formdata.append('type', MovementType[Number(data.movement)]);
   formdata.append('category', data.categories);
   formdata.append('value', data.value);
   formdata.append('description', data.description);

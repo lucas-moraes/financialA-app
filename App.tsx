@@ -36,7 +36,6 @@ function App(): JSX.Element {
         <Navbar title="Finance" />
         <View style={styles.view}>
           <ResumeCard />
-          <MovementCard />
           {state.mode === 'month' ? (
             <>
               <ResumeCard />

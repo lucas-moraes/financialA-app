@@ -15,7 +15,7 @@ export const ModalMenu = () => {
 
   const handleOpen = () => {
     Animated.spring(movementFromLeft, {
-      friction: 20,
+      friction: 150,
       toValue: 0,
       useNativeDriver: false,
     }).start();
@@ -57,7 +57,14 @@ export const ModalMenu = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.body}>
-              <ButtonMenu onPress={updateToLaunchMovement}>Lançar no mês seguinte</ButtonMenu>
+              <ButtonMenu
+                onPress={() => {
+                  updateToLaunchMovement();
+                  handleClose();
+                }}
+              >
+                Lançar no mês seguinte
+              </ButtonMenu>
             </View>
             <View style={styles.body}>
               <ButtonMenu
