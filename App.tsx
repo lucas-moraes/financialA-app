@@ -10,8 +10,9 @@ import { EditCard } from './src/components/organisms/EditCard';
 import SplashScreen from 'react-native-splash-screen';
 import { ModalMenu } from './src/components/atoms/ModalMenu';
 import { THEME } from './src/theme';
-import { ModalDeleteMovement } from './src/components/atoms/ModalDeleteMoviment';
+import { ModalLaunchMovement } from './src/components/atoms/ModalLaunchMovement';
 import { ModalCategories } from './src/components/atoms/ModalCategories';
+import { ModalDeleteMovement } from './src/components/atoms/ModalDeleteMoviment';
 
 function App(): JSX.Element {
   const state = useStore(store => store);
@@ -35,7 +36,6 @@ function App(): JSX.Element {
         <Navbar title="Finance" />
         <View style={styles.view}>
           <ResumeCard />
-          <MovementCard />
           {state.mode === 'month' ? (
             <>
               <ResumeCard />
@@ -52,6 +52,7 @@ function App(): JSX.Element {
       </Background>
       <ModalDeleteMovement />
       <ModalMenu />
+      <ModalLaunchMovement />
       <ModalCategories />
     </QueryClientProvider>
   );

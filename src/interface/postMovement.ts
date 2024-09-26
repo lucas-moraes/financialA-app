@@ -1,7 +1,7 @@
 export type PostMovement = {
   date: Date;
   categories: number;
-  Movement: string;
+  movement: string;
   value: number;
   description: string;
 };

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { ComponentStyles } from './styles';
 import { GetMovement, GetMovementFiltered } from '../../../services/useQuery';
@@ -27,15 +27,21 @@ export const MovementCard = () => {
   const { isLoading, data } = GetMovement();
 
   async function ConsultMovement(period: FilterMovement) {
-    const newMovement = await GetMovementFiltered(period);
+    const newData = await GetMovementFiltered(period);
 
-    setMovement(newMovement);
+    setMovement(newData);
   }
 
-  useMemo(() => {
-    if (!isLoading) {
+  useEffect(() => {
+    let isStarted = false;
+
+    if (!isLoading && !isStarted) {
       setMovement(data);
     }
+
+    () => {
+      isStarted = true;
+    };
   }, [isLoading]);
 
   return (
